@@ -4,12 +4,16 @@ import axios from 'axios'
 export default class Search extends Component {
 
     search=()=>{
+        //用户点击之后，将first设置为false，loading设置为加载中
+        this.props.updateState({isFirst:false,isLoading:true});
         //获取用户的输入
         const {value:keyvalues} = this.refs.keyvalue;
         //发起网络请求
         axios.get(`http://localhost:3000/api1/search/users?q=${keyvalues}`).then(
-            response => {this.props.saveUsers(response.data.items)},
-            error => {console.log('fail');}
+          //用户请求成功之后，更新状态
+            response => {this.props.updateState({users:response.data.items,isLoading:false})},
+          //发生错误之后也更新一下状态
+            error => {this.props.updateState({err:error,isLoading:false})}
         )
     }
 
