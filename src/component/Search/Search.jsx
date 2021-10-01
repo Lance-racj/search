@@ -5,7 +5,7 @@ export default class Search extends Component {
 
     search=()=>{
         //用户点击之后，将first设置为false，loading设置为加载中
-        this.props.updateState({isFirst:false,isLoading:true});
+        this.props.updateState({isFirst:false,isLoading:true,err:''});
         //获取用户的输入
         const {value:keyvalues} = this.refs.keyvalue;
         //发起网络请求
