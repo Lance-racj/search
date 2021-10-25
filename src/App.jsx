@@ -1,26 +1,22 @@
-import Search from './component/Search/Search';
-import List from './component/List/List';
+import Search from './container/Search';
+import List from './container/List';
 import React, { Component } from 'react'
+import store from './redux/store'
 
 
 export default class App extends Component {
 
-  state = {
-    users:[],
-    isFirst:true,
-    isLoading:false,
-    err:''
-  };
-
-  updateState=(stateObj)=>{
-    this.setState(stateObj);
-  }
+  componentDidMount(){
+    store.subscribe(()=>{
+        this.setState({});
+    })
+}
 
   render() {
     return (
       <div className="container">
-        <Search updateState={this.updateState}/>
-        <List {...this.state}/>
+        <Search store={store}/>
+        <List store={store}/>
       </div>
     )
   }
